@@ -1,0 +1,12 @@
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy_site:
+    name: "deploy site to docs"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "build site"
+        run: npm run build
+    
