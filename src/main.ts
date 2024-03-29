@@ -23,7 +23,7 @@ const createSoundButton = (soundUrl: string) => {
   button.addEventListener("click", () => playSound(audio.id, button));
   app.appendChild(button);
 
-  audio.addEventListener("canplaythrough", () => {
+  audio.addEventListener("canplay", () => {
     button.classList.toggle("disabled", false);
     button.setAttribute("style", `--duration: ${audio.duration}s`);
   });
