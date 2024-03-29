@@ -1,6 +1,12 @@
 import "./style.css";
 
-const sounds = ["buzzer.wav", "deurbel A.wav", "deurbel B.wav", "telefoon.mp3"];
+const sounds = [
+  "buzzer.wav",
+  "deurbel A.wav",
+  "deurbel B.wav",
+  "telefoon.mp3",
+  "jazz.mp3",
+];
 const app = document.querySelector("#app");
 const audios: HTMLAudioElement[] = [];
 
@@ -42,8 +48,16 @@ const playSound = (audioId: string, button: HTMLButtonElement) => {
     });
     button.classList.toggle("playing", true);
   } else {
-    audio.pause();
-    button.classList.toggle("playing", false);
+    const interval = setInterval(() => {
+      audio.volume *= 0.95;
+      if (audio.volume < 0.01) {
+        audio.volume = 0;
+        audio.pause();
+        button.classList.toggle("playing", false);
+        clearInterval(interval);
+      }
+    }, 100);
+    // audio.pause();
   }
 };
 
