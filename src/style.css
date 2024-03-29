@@ -5,3 +5,80 @@
   margin: 0;
   padding: 0;
 }
+
+:root {
+  font-size: 62.5%;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+
+  --foreground: #fff;
+  --background: #222;
+  --accent: #f70;
+}
+
+body {
+  background: var(--background);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#app {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: auto;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+button {
+  --duration: 1s;
+  font-size: 2rem;
+  text-transform: capitalize;
+  color: var(--foreground);
+  background: var(--background);
+  padding: 2rem;
+  border: 0.4rem solid currentColor;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  font-weight: bold;
+  transition: transform 0.2s ease-out;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button.disabled {
+  animation: flicker 0.5s alternate-reverse infinite;
+}
+
+button.playing::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  z-index: -1;
+  transform-origin: left;
+  animation: grow var(--duration) linear;
+}
+
+@keyframes flicker {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 0.4;
+  }
+}
+
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
